@@ -1,5 +1,6 @@
 clear all;
 
+% variables for tuning
 f_samp = 9000;
 f_tone1=1000;
 
@@ -60,7 +61,7 @@ subplot(5,1,5);
 plot(f_axis, abs(xr_sp_scaled)), axis([-4000 4000 0 3000]), grid on, ylabel("Xr(jf)"), xlabel("f"), title("Xr(jf)");
 
 % 1i) Calculate xr(t)
-xr = ifft(ifftshift(xr_sp_scaled));
+xr = iffts(xr_sp_scaled);
 
 % 1j) Plot xr(t) next to x(t)
 figure(2);
@@ -68,3 +69,9 @@ subplot(2,1,1);
 plot(t1, xt), axis([0 0.01 -0.55 0.55]), grid on, ylabel("x(t)"), xlabel("t"), title("x(t)");
 subplot(2,1,2);
 plot(t1, real(xr)), axis([0 0.01 -0.55 0.55]), grid on, ylabel("xr(t)"), xlabel("t"), title("xr(t)");
+
+
+% Functions
+function output_signal = iffts(input_signal)
+output_signal = ifft(ifftshift(input_signal));
+end
